@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../../model/User");
 const Deposit = require("../../model/Deposit");
 const Withdraw = require("../../model/Withdraw");
+const History = require("../../model/History");
 const { ensureAdmin } = require("../../config/auth");
 const comma = require("../../utils/comma");
 const bcrypt = require("bcryptjs");
