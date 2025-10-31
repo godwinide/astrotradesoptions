@@ -21,6 +21,18 @@ router.get("/", ensureAdmin, async (req, res) => {
     }
 });
 
+router.post("/", ensureAdmin, async (req, res) => {
+    try {
+        const users = await User.find({ isAdmin: false });
+        const pendingDeposits = await Deposit.find({ status: "pending" });
+        const pendingWithdrawals = await Withdraw.find({ status: "pending" });
+        return res.render("admin/dashboard", { layout: "layout3", comma, users, pendingDeposits, pendingWithdrawals, res, req });
+    }
+    catch (err) {
+        return res.redirect("/admin");
+    }
+});
+
 router.get("/settings", ensureAdmin, async (req, res) => {
     try {
         const site = await Site.findOne();
